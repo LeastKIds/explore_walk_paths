@@ -1,0 +1,45 @@
+{% extends 'layout.html' %}
+
+{% block body%}
+  <form id="form" action="/show_map" method="post">
+    <input id="orig" name="orig" placeholder="출발지" required="" autofocus="" style="width: 100%; margin-top: 10px;">
+    <input id="dest" type="" name="dest" placeholder="목적지" required="" autofocus="" style="width: 100%; margin-top: 10px;">
+    <input id="duration" type="" name="duration" placeholder="분(숫자만)" required="" autofocus="" style="width: 100%; margin-top: 10px;">
+    <button class="btn btn-lg btn-primary btn-block"   type="submit" style="width: 100%; margin-top: 10px;">Start</button><br>
+  </form>
+  <div id="pageloader">
+    <img src="http://cdnjs.cloudflare.com/ajax/libs/semantic-ui/0.16.1/images/loader-large.gif" alt="processing..." />
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $("#form").on("submit", function(){
+        $("#pageloader").fadeIn();
+      });//submit
+    });//document ready
+  </script>
+
+  <style>
+    #pageloader
+    {
+      background: rgba( 255, 255, 255, 0.8 );
+      display: none;
+      height: 100%;
+      position: fixed;
+      width: 100%;
+      z-index: 9999;
+    }
+
+    #pageloader img
+    {
+      left: 30%;
+      /* margin-left: 32px; */
+      /* margin-top: 32px; */
+      position: absolute;
+      top: 30%;
+    } 
+  </style>
+
+ 
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'home.html' %}
+
+{% block content %}
+
+  <h6>{{ result_hms[0] }}시간 {{ result_hms[1] }}분 입니다.</h6>  
+  <div>
+    <div class="container_map">
+      <button id="select_btn" onclick="select_btn()" class="btn btn-lg btn-primary btn-block" style="width: 100%; margin-top: 10px;">select</button>
+      <button id="retry_btn" onclick="retry_btn()" class="btn btn-lg btn-primary btn-block" style="width: 100%; margin-top: 10px;">retry</button>
+    </div>
+    <iframe srcdoc="{{ folium_map }}" style="border:none; width: 100%; height:100%; justify-content: center; overflow: hidden;"> </iframe>
+  </div>
+
+  <script>
+
+    const orig = '{{ orig }}'
+    const dest = '{{ dest }}'
+    const duration = '{{  duration }}'
+    const all_route = '{{  all_route }}'
+    const result_hms = '{{ result_hms }}'
+    const folium_map = '{{ folium_map }}'
+    
+    function select_btn() {
+      console.log(orig, dest)
+      axios.post('/learning', {
+        'orig' : orig,
+        'dest' : dest,
+        'duration' : duration,
+        'all_route' : all_route,
+      }).then(() => {
+        console.log('learning ok...')
+      }).catch(error => {
+        console.error('error')
+      })
+      }
+
+    function retry_btn() {
+      params = {orig : orig, dest : dest, duration : duration}
+      console.log(orig, dest)
+
+      const form = document.createElement('form')
+      form.method = 'post'
+      form.action = '/show_map'
+
+      for(const key in params) {
+        const hiddenField = document.createElement('input')
+        hiddenField.type = 'hidden'
+        hiddenField.name = key
+        hiddenField.value = params[key]
+
+        form.appendChild(hiddenField)
+      }
+      document.body.appendChild(form)
+      form.submit()
+      
+    }
+
+    
+    
+
+    
+  </script>
+{% endblock %}
+
+

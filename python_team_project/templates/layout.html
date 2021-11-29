@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Walking Path</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    </head>
+    
+    <body>
+    
+        <nav class="navbar navbar-light" style="background-color: #fafafa">
+          <a class="navbar-brand" href="/">Walking App</a>
+        </nav>
+        
+        <div class="container">
+          {% with messages = get_flashed_messages() %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  {{message}}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+
+          {% block body %}{% endblock %}
+        </div>
+
+        <!-- 지도 들어가는 자리 -->
+        <div class="container"> 
+          {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
+<style>
+  .container_map {
+    display: flex;
+    justify-content: center;
+  }
+</style>
